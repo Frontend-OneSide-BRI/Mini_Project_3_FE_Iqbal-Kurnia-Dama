@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -39,10 +40,13 @@ const Navbar = () => {
           className={`absolute inset-x-0 z-30 w-full px-6 py-8 mt-4 space-y-6 transition-all duration-300 ease-in-out bg-indigo-600 top-16 md:mt-0 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:space-y-0 md:-mx-6 md:flex md:items-center ${
             open ? "translate-x-0 opacity-100" : "opacity-0 -translate-x-full"
           }`}>
-          <a href='/#' className='block text-white transition-colors duration-300 md:px-6 hover:text-indigo-300'>
+          <Link to="/all-movie" className='block text-white transition-colors duration-300 md:px-6 hover:text-red-400'>
             Movies
+          </Link>
+          <a href='/#' className='block text-red-400white transition-colors duration-300 md:px-6 hover:text-red-400'>
+            Users
           </a>
-          <a href='/#' className='block text-white transition-colors duration-300 md:px-6 hover:text-indigo-300'>
+          <a href='/#' className='block text-red-400white transition-colors duration-300 md:px-6 hover:text-red-400'>
             Login
           </a>
         </div>

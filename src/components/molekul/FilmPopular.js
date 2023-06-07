@@ -34,7 +34,7 @@ const BrowseFilm = () => {
   };
 
   return (
-    <div className="bg-slate-900 px-20">
+    <div className="bg-slate-900 px-20 pb-32">
       <h1 className="text-white text-4xl py-5 text-center">Populer Movie in LayarKaca 21</h1>
       <Carousel
         responsive={responsive}

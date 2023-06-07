@@ -1,14 +1,16 @@
 import React from 'react'
 import Header from '../components/organisme/Header'
 import About from '../components/molekul/About'
-import BrowseComponent from '../components/molekul/BrowseFilm'
+import FilmPopular from '../components/molekul/FilmPopular'
+import Footer from '../components/molekul/Footers'
 
 const Home = () => {
   return (
     <div>
       <Header />
       <About />
-      <BrowseComponent />
+      <FilmPopular />
+      <Footer />
     </div>
   )
 }
