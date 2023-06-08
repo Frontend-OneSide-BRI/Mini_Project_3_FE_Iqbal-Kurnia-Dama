@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { getMovieListLimit } from "../../services/api";
+// import { getMovieListLimit } from "../../services/apiMovie";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getMovieListLimit as MoviesLists } from "../../redux/actions/movies";
 
 const BrowseFilm = () => {
-  const [populerMovie, setPopulerMovie] = useState([]);
+  // menggunakan state
+  // const [populerMovie, setPopulerMovie] = useState([]);
+  // useEffect(() => {
+  //   getMovieListLimit().then((result) => {
+  //     setPopulerMovie(result);
+  //   });
+  // }, []);
 
+  // penerapan redux
   const image = process.env.REACT_APP_IMG_URL;
+  const dispatch = useDispatch();
+  const movieListLimit = useSelector((state) => state.movies.movieListLimit);
 
   useEffect(() => {
-    getMovieListLimit().then((result) => {
-      setPopulerMovie(result);
-    });
-  }, []);
+    dispatch(MoviesLists());
+  }, [dispatch]);
+
 
   const responsive = {
     superLargeDesktop: {
@@ -43,7 +53,7 @@ const BrowseFilm = () => {
         autoPlaySpeed={3000}
         rewind={true}
       >
-        {populerMovie.map((result, index) => (
+        {movieListLimit.map((result, index) => (
           <div key={index} className="p-2">
               <img
                 className="transition-all duration-500 hover:scale-105"

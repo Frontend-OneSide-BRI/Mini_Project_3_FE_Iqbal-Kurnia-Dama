@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { getMovieList, searchMovie } from "../../../services/api";
-import { Link } from "react-router-dom";
+import { getMovieList, searchMovie } from "../../../services/apiMovie";
 import Header from "../Header";
 import Footer from "../../molekul/Footers";
 import Search from "../../atom/Search";
+// import { useDispatch, useSelector } from "react-redux";
+// import { getMovieList, searchMovie } from "../../redux/actions/movies";
 
 const Movies = () => {
+  const image = process.env.REACT_APP_IMG_URL;
   const [populerMovie, setPopulerMovie] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-
-  const image = process.env.REACT_APP_IMG_URL;
 
   useEffect(() => {
     getMovieList().then((result) => {
@@ -34,6 +34,16 @@ const Movies = () => {
     const query = await searchMovie(q);
     setPopulerMovie(query.results);
   };
+
+  // menggunakan redux
+  // const dispatch = useDispatch();
+  // const movieList = useSelector((state) => state.movies.movieList)
+  // const searchMovies = useSelector((state) => state.movies.searchedMovies);
+
+  // useEffect(() => {
+  //   dispatch(getMovieList())
+  //   dispatch(searchMovie())
+  // }, [dispatch]);
 
   return (
     <div>

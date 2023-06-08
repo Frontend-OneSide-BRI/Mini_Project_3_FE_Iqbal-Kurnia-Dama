@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
-import { logout } from "../../actions/auth";
-import { clearMessage } from "../../actions/message";
+import { logout } from "../../redux/actions/auth";
+import { clearMessage } from "../../redux/actions/message";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -19,7 +19,7 @@ const Navbar = () => {
 
   useEffect(() => {
     if (["/login", "/register"].includes(location.pathname)) {
-      dispatch(clearMessage()); // clear message when changing location
+      dispatch(clearMessage());
     }
   }, [dispatch, location]);
 
