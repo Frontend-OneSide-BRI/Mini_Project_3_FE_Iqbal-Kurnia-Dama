@@ -1,5 +1,9 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+
+import { logout } from "../../actions/auth";
+import { clearMessage } from "../../actions/message";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -7,12 +11,28 @@ const Navbar = () => {
   const handleClick = () => {
     setOpen(!open);
   };
+
+  const { user: currentUser } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  let location = useLocation();
+
+  useEffect(() => {
+    if (["/login", "/register"].includes(location.pathname)) {
+      dispatch(clearMessage()); // clear message when changing location
+    }
+  }, [dispatch, location]);
+
+  const userLogout = useCallback(() => {
+    dispatch(logout());
+  }, [dispatch]);
+
   return (
     <header className='relative z-10'>
       <nav className='container relative flex items-center justify-between px-6 py-8 mx-auto text-white'>
-        <a href='/#'>
+        <Link to='/'>
           <h1 className='text-3xl'>ILK21</h1>
-        </a>
+        </Link>
         <button onClick={handleClick} className='md:hidden'>
           <span style={{ display: !open ? "block" : "none" }}>
             <svg
@@ -40,15 +60,33 @@ const Navbar = () => {
           className={`absolute inset-x-0 z-30 w-full px-6 py-8 mt-4 space-y-6 transition-all duration-300 ease-in-out bg-indigo-600 top-16 md:mt-0 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:space-y-0 md:-mx-6 md:flex md:items-center ${
             open ? "translate-x-0 opacity-100" : "opacity-0 -translate-x-full"
           }`}>
-          <Link to="/all-movie" className='block text-white transition-colors duration-300 md:px-6 hover:text-red-400'>
+          <Link to='/all-movie' className='block text-white transition-colors duration-300 md:px-6 hover:text-red-400'>
             Movies
           </Link>
-          <a href='/#' className='block text-red-400white transition-colors duration-300 md:px-6 hover:text-red-400'>
-            Users
-          </a>
-          <a href='/#' className='block text-red-400white transition-colors duration-300 md:px-6 hover:text-red-400'>
+          {currentUser ? (
+            <div>
+              <Link
+                href='/profile'
+                className='block text-red-400white transition-colors duration-300 md:px-6 hover:text-red-400'>
+                Hello {currentUser.username}
+              </Link>
+              <a
+                href='/login'
+                onClick={userLogout}
+                className='block text-red-400white transition-colors duration-300 md:px-6 hover:text-red-400'>
+                Log Out
+              </a>
+            </div>
+          ) : (
+            <Link
+              to='/login'
+              className='block text-red-400white transition-colors duration-300 md:px-6 hover:text-red-400'>
+              Login
+            </Link>
+          )}
+          {/* <a href='/login' className='block text-red-400white transition-colors duration-300 md:px-6 hover:text-red-400'>
             Login
-          </a>
+          </a> */}
         </div>
       </nav>
     </header>

@@ -44,7 +44,7 @@ const BrowseFilm = () => {
         rewind={true}
       >
         {populerMovie.map((result, index) => (
-          <div key={index} className="movie-item p-2">
+          <div key={index} className="p-2">
               <img
                 className="transition-all duration-500 hover:scale-105"
                 src={`${image}/${result.poster_path}`}

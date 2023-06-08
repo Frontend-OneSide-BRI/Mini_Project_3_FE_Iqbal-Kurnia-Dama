@@ -3,7 +3,7 @@ import watchMovie from '../../assets/images/icons/nonton.svg'
 
 const About = () => {
   return (
-    <section className='container px-14 py-8 mx-auto lg:py-40 bg-slate-900' id='about'>
+    <section className=' px-14 py-8 mx-auto lg:py-40 bg-slate-900' id='about'>
       <div className='lg:flex lg:items-center lg:-mx-4'>
         <div className='lg:w-1/2 lg:px-4'>
           <h3 className='text-xl font-medium text-white md:text-2xl lg:text-3xl'>
